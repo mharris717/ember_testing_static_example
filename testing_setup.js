@@ -58,4 +58,25 @@ function setupTesting() {
       simulateRemoteResponse: false
     })
   });
+
+  var res = {}
+
+  res.transitionTo = function(a,b) {
+    Ember.run(function() {
+      b ? App.Router.router.transitionTo(a,b) : App.Router.router.transitionTo(a)
+    })
+  }
+
+  res.startAtRoute = function(a,b) {
+    beforeEach(function() {
+      b
+      res.transitionTo(a,b)
+    })
+  }
+
+  res.$ = function(selector) {
+    return $("#test-app-container "+selector);
+  }
+
+  return res
 }

@@ -6,34 +6,26 @@ onload = function(){
 
 var assert = chai.assert;
 describe("Widgets", function() {
-  setupTesting.apply(this)
+  t = setupTesting()
 
   describe("widget index", function() {
-    beforeEach(function() {
-      Ember.run(function() {
-        App.Router.router.transitionTo("widgets.index")
-      })
-    })
-
-    it("smoke", function() {
-      assert.equal(2,2)
-    })
+    t.startAtRoute("widgets.index")
 
     it("has 2 widgets", function() {
-      assert.equal($("#test-app-container #widgets .widget").length,2)
+      assert.equal(t.$("#widgets .widget").length,2)
     })
 
     it("first widget is green", function() {
-      assert.equal($("#test-app-container #widgets .widget:first").text().trim(),'Green')
+      assert.equal(t.$("#widgets .widget:first").text().trim(),'Green')
     })
 
     describe("click on widget", function() {
       beforeEach(function() {
-        $("#test-app-container #widgets .widget:first a").click()
+        t.$("#widgets .widget:first a").click()
       })
 
       it("widget displays", function() {
-        var text = $("#test-app-container #widget").text().trim()
+        var text = t.$("#widget").text().trim()
         assert.equal(text,"Green")
       })
 
@@ -42,13 +34,10 @@ describe("Widgets", function() {
 
   describe("widget show", function() {
     beforeEach(function() {
-      Ember.run(function() {
-        widget = App.Widget.find(1)
-        App.Router.router.transitionTo("widget",widget)
-      })
+      t.transitionTo("widget",App.Widget.find(1))
     })
     it("widget displays", function() {
-      var text = $("#test-app-container #widget").text().trim()
+      var text = t.$("#widget").text().trim()
       assert.equal(text,"Green")
     })
   })
