@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="handlebars.js"></script>
+    <script type="text/javascript" src="ember.js"></script>
+    <script type="text/javascript" src="ember_data.js"></script>
+    <script type="text/javascript" src="mocha.js"></script>
+    <script type="text/javascript" src="chai.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="testing_setup.js"></script>
+    <script type="text/javascript" src="tests.js"></script>
+  </head>
+  <body>
+    <script type="text/x-handlebars" data-template-name="application">
+      <h1>Widget App</h1>
+      {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="widgets">
+      <h2>Widgets</h2>
+      <div id="widgets">
+        {{#each widget in this}}
+          <div class="widget">
+            {{#linkTo widget widget}}{{widget.color}}{{/linkTo}}
+          </div>
+        {{/each}}
+      </div>
+      {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="widget">
+      <h3>Widget</h3>
+      <div id="widget">
+        {{color}}
+      </div>
+    </script>
+
+    Hello
+
+    <div id="mocha"></div>
+  </body>
+</html>
