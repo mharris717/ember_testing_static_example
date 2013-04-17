@@ -3,8 +3,6 @@ function setupTesting() {
   // non-deterministic, which is bad for tests.
   Ember.testing = true;
 
-  setupApp()
-
   // Re-enable automatic run loops when testing is over, for easy debugging in
   // the console.
   after(function() { // after all tests have finished
