@@ -57,24 +57,30 @@ function setupTesting() {
     })
   });
 
-  var res = {}
+  // Create a convenience object to wrap jQuery and simulate the browser
+  // in a browser. #inception
+  var browser = {}
 
-  res.transitionTo = function(a,b) {
+  // The browser can go to any URL.
+  browser.transitionTo = function(a,b) {
     Ember.run(function() {
       b ? App.Router.router.transitionTo(a,b) : App.Router.router.transitionTo(a)
     })
   }
 
-  res.startAtRoute = function(a,b) {
+  // The browser starts somewhere.
+  browser.startAtRoute = function(a,b) {
     beforeEach(function() {
       b
-      res.transitionTo(a,b)
+      browser.transitionTo(a,b)
     })
   }
 
-  res.$ = function(selector) {
+  // The entire web page lives inside #test-app-container as far as the
+  // tests know.
+  browser.$ = function(selector) {
     return $("#test-app-container "+selector);
   }
 
-  return res
+  return browser
 }
